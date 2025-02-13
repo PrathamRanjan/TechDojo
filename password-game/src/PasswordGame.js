@@ -9,6 +9,7 @@ export default function PasswordGame() {
   const [timer, setTimer] = useState(15);
   const [gameActive, setGameActive] = useState(false);
   const [passwordStrengthMessage, setPasswordStrengthMessage] = useState("");
+  const [gameOver, setGameOver] = useState(false); // Added state for game over
 
   const rules = [
     { rule: "Must be at least 8 characters", check: (pwd) => pwd.length >= 8 },
@@ -35,6 +36,7 @@ export default function PasswordGame() {
       }, 1000);
       return () => clearInterval(interval);
     } else if (timer === 0) {
+      setGameOver(true); // Mark game as over
       const passedRulesCount = rules.filter(rule => rule.check(password)).length;
       if (passedRulesCount >= 3) {
         setPasswordStrengthMessage("This is your strong password!");
@@ -56,29 +58,53 @@ export default function PasswordGame() {
     }
   };
 
+  // 🔄 **Reset the game**
+  const resetGame = () => {
+    setPassword("");
+    setMessage("");
+    setActiveRules([0]);
+    setScore(0);
+    setTimer(15);
+    setGameActive(false);
+    setPasswordStrengthMessage("");
+    setGameOver(false);
+  };
+
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
       <div className="p-6 max-w-lg mx-auto bg-white rounded-xl shadow-lg space-y-4 border border-gray-300">
         <h1 className="text-2xl font-bold text-center">The Password Game</h1>
-        <p className="text-center text-gray-700">Time Left: {timer}s | Score: {score}</p>
-        <input 
-          type="text" 
-          className="border p-3 w-full rounded text-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
-          placeholder="Enter your password..." 
-          value={password} 
-          onChange={(e) => validatePassword(e.target.value)} 
-        />
-        <div className="space-y-2">
-          {activeRules.map((idx) => (
-            <p key={idx} className={rules[idx].check(password) ? "text-green-600 font-medium" : "text-red-600 font-medium"}>
-              {rules[idx].rule}
-            </p>
-          ))}
-        </div>
-        {timer === 0 && <p className="text-xl font-bold text-red-600 text-center">Game Over! Your Score: {score}</p>}
-        {timer === 0 && <p className="text-xl font-bold text-blue-600 text-center">{passwordStrengthMessage}</p>}
+        {!gameOver ? (
+          <>
+            <p className="text-center text-gray-700">Time Left: {timer}s | Score: {score}</p>
+            <input 
+              type="text" 
+              className="border p-3 w-full rounded text-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+              placeholder="Enter your password..." 
+              value={password} 
+              onChange={(e) => validatePassword(e.target.value)} 
+            />
+            <div className="space-y-2">
+              {activeRules.map((idx) => (
+                <p key={idx} className={rules[idx].check(password) ? "text-green-600 font-medium" : "text-red-600 font-medium"}>
+                  {rules[idx].rule}
+                </p>
+              ))}
+            </div>
+          </>
+        ) : (
+          <>
+            <p className="text-xl font-bold text-red-600 text-center">Game Over! Your Score: {score}</p>
+            <p className="text-xl font-bold text-blue-600 text-center">{passwordStrengthMessage}</p>
+            <button 
+              className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full block mx-auto"
+              onClick={resetGame}
+            >
+              Play Again
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
 }
-
