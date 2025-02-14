@@ -36,7 +36,7 @@ const Project = () => {
         padding: "10px"
       }}>
         <iframe
-          src="https://tech-dojo-final-dr2rlxjzx-adityas-projects-000ef4ef.vercel.app/ai-engineer"
+          src="https://tech-dojo-final.vercel.app/ai-engineer"
           width="100%"
           height="100%"
           style={{ 
