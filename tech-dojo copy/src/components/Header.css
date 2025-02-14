@@ -1,0 +1,83 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px 30px;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  
+/* Left - Tech Dojo logo */
+    .header-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  
+  
+  .logo {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  /* Center - Navigation Links */
+  .nav {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .nav a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: "Poppins", sans-serif;
+    padding: 5px 10px;
+  }
+  
+  .nav a.active {
+    color: purple;
+    font-weight: bold;
+  }
+  
+  /* Right - Profile Image */
+  /* Right - Profile Image */
+ .header-right {
+    flex: 1;
+    display: flex;
+    align-items: center; /* Ensures vertical alignment */
+    justify-content: flex-end; /* Pushes profile image to the right */
+    padding-right: 60px; /* Adjust this value if necessary */
+    min-width: 80px; /* Ensures it doesn’t get squished */
+  }
+  
+  
+  .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .profile-placeholder {
+    width: 40px;
+    height: 40px;
+    background-color: green;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 18px;
+  }

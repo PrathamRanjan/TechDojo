@@ -1,0 +1,17 @@
+.classroom-container {
+    display: flex;
+    min-height: 100vh;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  .classroom-content {
+    flex-grow: 1;
+    padding: 20px;
+    margin-left: 200px; /* Same width as Sidebar */
+  }
+  
+  .classroom-content h1 {
+    font-size: 2em;
+    color: #333;
+  }
+  
